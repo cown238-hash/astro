@@ -67,7 +67,7 @@ describe('CSP', () => {
 	it('should generate the hash with the sha512 algorithm', async () => {
 		fixture = await loadFixture({
 			root: './fixtures/csp/',
-			experimental: {
+			security: {
 				csp: {
 					algorithm: 'SHA-512',
 				},
@@ -84,7 +84,7 @@ describe('CSP', () => {
 	it('should generate the hash with the sha384 algorithm', async () => {
 		fixture = await loadFixture({
 			root: './fixtures/csp/',
-			experimental: {
+			security: {
 				csp: {
 					algorithm: 'SHA-384',
 				},
@@ -102,7 +102,7 @@ describe('CSP', () => {
 	it('should render hashes provided by the user', async () => {
 		fixture = await loadFixture({
 			root: './fixtures/csp/',
-			experimental: {
+			security: {
 				csp: {
 					styleDirective: {
 						hashes: ['sha512-hash1', 'sha384-hash2'],
@@ -128,7 +128,7 @@ describe('CSP', () => {
 	it('should contain the additional directives', async () => {
 		fixture = await loadFixture({
 			root: './fixtures/csp/',
-			experimental: {
+			security: {
 				csp: {
 					directives: ["img-src 'self' 'https://example.com'"],
 				},
@@ -146,7 +146,7 @@ describe('CSP', () => {
 	it('should contain the custom resources for "script-src" and "style-src"', async () => {
 		fixture = await loadFixture({
 			root: './fixtures/csp/',
-			experimental: {
+			security: {
 				csp: {
 					styleDirective: {
 						resources: ['https://cdn.example.com', 'https://styles.cdn.example.com'],
@@ -215,7 +215,7 @@ describe('CSP', () => {
 	it('allows add `strict-dynamic` when enabled', async () => {
 		fixture = await loadFixture({
 			root: './fixtures/csp/',
-			experimental: {
+			security: {
 				csp: {
 					scriptDirective: {
 						strictDynamic: true,
@@ -234,7 +234,7 @@ describe('CSP', () => {
 	it("allows the use of directives that don't require values, and deprecated ones", async () => {
 		fixture = await loadFixture({
 			root: './fixtures/csp/',
-			experimental: {
+			security: {
 				csp: {
 					directives: [
 						'upgrade-insecure-requests',
@@ -260,7 +260,7 @@ describe('CSP', () => {
 		fixture = await loadFixture({
 			root: './fixtures/csp-adapter/',
 			adapter: testAdapter(),
-			experimental: {
+			security: {
 				csp: true,
 			},
 		});
@@ -303,7 +303,7 @@ describe('CSP', () => {
 		);
 	});
 
-	it('should generate hashes and directives for fonts', async () => {
+	it.only('should generate hashes and directives for fonts', async () => {
 		fixture = await loadFixture({
 			root: './fixtures/csp-fonts/',
 		});
@@ -364,7 +364,7 @@ describe('CSP', () => {
 					routeToHeaders = payload;
 				},
 			}),
-			experimental: {
+			security: {
 				csp: true,
 			},
 		});

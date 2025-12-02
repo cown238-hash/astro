@@ -667,7 +667,7 @@ async function generatePath(
 
 	if (
 		pipeline.settings.adapter?.adapterFeatures?.experimentalStaticHeaders &&
-		pipeline.settings.config.experimental?.csp
+		pipeline.settings.config.security?.csp
 	) {
 		routeToHeaders.set(pathname, { headers: responseHeaders, route: integrationRoute });
 	}
@@ -717,14 +717,14 @@ async function createBuildManifest(
 		};
 	}
 
-	if (shouldTrackCspHashes(settings.config.experimental.csp)) {
-		const algorithm = getAlgorithm(settings.config.experimental.csp);
+	if (shouldTrackCspHashes(settings.config.security.csp)) {
+		const algorithm = getAlgorithm(settings.config.security.csp);
 		const scriptHashes = [
-			...getScriptHashes(settings.config.experimental.csp),
+			...getScriptHashes(settings.config.security.csp),
 			...(await trackScriptHashes(internals, settings, algorithm)),
 		];
 		const styleHashes = [
-			...getStyleHashes(settings.config.experimental.csp),
+			...getStyleHashes(settings.config.security.csp),
 			...settings.injectedCsp.styleHashes,
 			...(await trackStyleHashes(internals, settings, algorithm)),
 		];
@@ -734,12 +734,12 @@ async function createBuildManifest(
 				? 'adapter'
 				: undefined,
 			styleHashes,
-			styleResources: getStyleResources(settings.config.experimental.csp),
+			styleResources: getStyleResources(settings.config.security.csp),
 			scriptHashes,
-			scriptResources: getScriptResources(settings.config.experimental.csp),
+			scriptResources: getScriptResources(settings.config.security.csp),
 			algorithm,
 			directives: getDirectives(settings),
-			isStrictDynamic: getStrictDynamic(settings.config.experimental.csp),
+			isStrictDynamic: getStrictDynamic(settings.config.security.csp),
 		};
 	}
 	return {

@@ -77,7 +77,7 @@ async function restartContainer(container: Container): Promise<Container | Error
 
 	try {
 		const { astroConfig } = await resolveConfig(container.inlineConfig, 'dev', container.fs);
-		if (astroConfig.experimental.csp) {
+		if (astroConfig.security.csp) {
 			logger.warn(
 				'config',
 				"Astro's Content Security Policy (CSP) does not work in development mode. To verify your CSP implementation, build the project and run the preview server.",
@@ -125,7 +125,7 @@ export async function createContainerWithAutomaticRestart({
 }: CreateContainerWithAutomaticRestart): Promise<Restart> {
 	const logger = createNodeLogger(inlineConfig ?? {});
 	const { userConfig, astroConfig } = await resolveConfig(inlineConfig ?? {}, 'dev', fs);
-	if (astroConfig.experimental.csp) {
+	if (astroConfig.security.csp) {
 		logger.warn(
 			'config',
 			"Astro's Content Security Policy (CSP) does not work in development mode. To verify your CSP implementation, build the project and run the preview server.",
